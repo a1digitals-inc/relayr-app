@@ -4,10 +4,14 @@ go: "1.10"
 services:
   - docker
 
+before_install:
+  - go get -t -v ./...
+
 go_import_path: github.com/andrleite/relayr-app
 
 after_success:
-  make docker-release
+  - bash <(curl -s https://codecov.io/bash)
+  - make docker-release
 
 before_script:
   # Setup dependency management tool
@@ -19,4 +23,5 @@ before_script:
   - dep ensure
 script:
   - $GOPATH/bin/goveralls -service=travis-ci
+  - go test -race -coverprofile=coverage.txt -covermode=atomic ./...
   - make test build VERSION="$TRAVIS_COMMIT"
