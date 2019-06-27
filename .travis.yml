@@ -1,0 +1,22 @@
+---
+language: go
+go: "1.10"
+services:
+  - docker
+
+go_import_path: github.com/andrleite/relayr-app
+
+after_success:
+  make docker-release
+
+before_script:
+  # Setup dependency management tool
+  - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin quay.io
+  - curl -L -s https://github.com/golang/dep/releases/download/v0.5.0/dep-linux-amd64 -o $GOPATH/bin/dep
+  - chmod +x $GOPATH/bin/dep
+  - go get -u golang.org/x/lint/golint
+  - go get github.com/mattn/goveralls
+  - dep ensure
+script:
+  - $GOPATH/bin/goveralls -service=travis-ci
+  - make test build VERSION="$TRAVIS_COMMIT"
