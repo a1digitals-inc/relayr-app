@@ -23,5 +23,5 @@ before_script:
   - dep ensure
 script:
   - $GOPATH/bin/goveralls -service=travis-ci
-  - go test -race -coverprofile=coverage.txt -covermode=atomic
+  - go test -race -coverprofile=coverage.txt -covermode=atomic ./...
   - make test build VERSION="$TRAVIS_COMMIT"
