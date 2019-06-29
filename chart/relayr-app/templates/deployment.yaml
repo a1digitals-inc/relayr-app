@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "relayr-app.name" . }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "relayr-app.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "relayr-app.name" . }}
+    spec:
+      containers:
+      - name: {{ template "relayr-app.name" . }}
+        image: "{{ .Values.image }}:{{ .Values.imageTag }}"
+        imagePullPolicy: {{ .Values.imagePullPolicy | quote }}
+        env:
+        - name: DATABASE_USER
+          value: "{{ .Values.database.user }}"
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: "{{ template "relayr-app.name" . }}-mysql"
+              key: mysql-password
+        - name: DATABASE_NAME
+          value: "{{ .Values.database.name }}"
+        - name: DATABASE_PORT
+          value: "{{ .Values.database.port }}"
+        - name: DATABASE_HOST
+          value: "{{ template "relayr-app.name" . }}-mysql"
+        ports:
+        - name: http
+          containerPort: 9000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 15
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+        resources:
+          requests:
+            memory: 25Mi
+            cpu: 5m
+          limits:
+            memory: 50Mi
+            cpu: 10m

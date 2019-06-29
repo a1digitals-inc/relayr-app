@@ -10,14 +10,29 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
+// getEnv get key environment variable if exist otherwise return defalutValue
+func getEnv(env string) string {
+	value := os.Getenv(env)
+	if len(value) == 0 {
+		log.Printf("Environment variable %s not found!", env)
+	}
+	return value
+}
+
 // Connect create a new connection with database and return it
 func Connect() *gorm.DB {
+	dbUser := getEnv("DATABASE_USER")
+	dbPass := getEnv("DATABASE_PASSWORD")
+	dbHost := getEnv("DATABASE_HOST")
+	dbPort := getEnv("DATABASE_PORT")
+	dbName := getEnv("DATABASE_NAME")
+
 	URL := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
-		os.Getenv("DATABASE_USER"),
-		os.Getenv("DATABASE_PASSWORD"),
-		os.Getenv("DATABASE_HOST"),
-		os.Getenv("DATABASE_PORT"),
-		os.Getenv("DATABASE_NAME"))
+		dbUser,
+		dbPass,
+		dbHost,
+		dbPort,
+		dbName)
 	db, err := gorm.Open("mysql", URL)
 	if err != nil {
 		log.Fatal(err)
