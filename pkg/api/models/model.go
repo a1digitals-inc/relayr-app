@@ -33,6 +33,9 @@ func GetByID(table, id string) interface{} {
 	defer db.Close()
 	switch table {
 	case USERS:
+		if db.Where("id =?", id).First(&User{}).RecordNotFound() {
+			return nil
+		}
 		return db.Where("id = ?", id).First(&User{}).Value
 	case FEEDBACKS:
 		return db.Where("id = ?", id).First(&Feedback{}).Value

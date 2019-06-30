@@ -16,3 +16,5 @@ vendor/
 rootfs/usr/
 rootfs/host/
 coverage.txt
+charts/
+tls*

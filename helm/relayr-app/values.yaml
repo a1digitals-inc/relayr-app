@@ -1,0 +1,35 @@
+image: quay.io/andrleite/relayr-app
+imageTag: 8d005bca9a441fd3c6fb203147cd4dc5f669f76b
+imagePullPolicy: IfNotPresent
+targetPort: 9000
+service:
+  port: 30080
+ingress:
+  host: relayr.app
+database:
+  name:
+  user:
+  port:
+resources:
+  requests:
+    memory: 25Mi
+    cpu: 5m
+  limits:
+    memory: 50Mi
+    cpu: 10m
+
+mysql:
+  mysqlDatabase: relayr
+  mysqlUser: relayr
+  metrics:
+    enabled: true
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 30m
+    limits:
+      memory: 256Mi
+      cpu: 100m
+  persistence:
+    enabled: true
+    size: 2Gi
