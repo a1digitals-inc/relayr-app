@@ -38,7 +38,12 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 func GetUser(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	user := models.GetByID(models.USERS, vars["id"])
-	utils.ToJSON(w, user, http.StatusOK)
+	if user == nil {
+		w.Write([]byte(""))
+		utils.ToJSON(w, user, http.StatusNoContent)
+	} else {
+		utils.ToJSON(w, user, http.StatusOK)
+	}
 }
 
 // PutUser update user info
