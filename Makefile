@@ -10,9 +10,9 @@ SHELL := /bin/bash
 GOTEST := go test -v
 
 LDFLAGS := "-s -w \
--X github.com/cloud104/tks-controller/pkg/version.version=${VERSION} \
--X github.com/cloud104/tks-controller/pkg/version.gitCommit=${GITCOMMIT} \
--X github.com/cloud104/tks-controller/pkg/version.buildDate=${DATE}"
+-X github.com/andrleite/relayr-app/pkg/version.version=${VERSION} \
+-X github.com/andrleite/relayr-app/pkg/version.gitCommit=${GITCOMMIT} \
+-X github.com/andrleite/relayr-app/pkg/version.buildDate=${DATE}"
 
 BINARY_DEST_DIR := rootfs/usr/local/bin
 
