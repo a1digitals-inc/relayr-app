@@ -2,10 +2,22 @@
 
 
 [[projects]]
+  name = "github.com/beorn7/perks"
+  packages = ["quantile"]
+  revision = "4b2b341e8d7715fae06375aa633dbb6e91b3fb46"
+  version = "v1.0.0"
+
+[[projects]]
   name = "github.com/go-sql-driver/mysql"
   packages = ["."]
   revision = "72cd26f257d44c1114970e19afddcd812016007e"
   version = "v1.4.1"
+
+[[projects]]
+  name = "github.com/golang/protobuf"
+  packages = ["proto"]
+  revision = "b5d812f8a3706043e23a9cd5babf2e5423744d30"
+  version = "v1.3.1"
 
 [[projects]]
   name = "github.com/gorilla/mux"
@@ -29,6 +41,53 @@
   version = "v1.0.0"
 
 [[projects]]
+  name = "github.com/matttproud/golang_protobuf_extensions"
+  packages = ["pbutil"]
+  revision = "c12348ce28de40eed0136aa2b644d0ee0650e56c"
+  version = "v1.0.1"
+
+[[projects]]
+  name = "github.com/prometheus/client_golang"
+  packages = [
+    "prometheus",
+    "prometheus/internal",
+    "prometheus/promhttp"
+  ]
+  revision = "4ab88e80c249ed361d3299e2930427d9ac43ef8d"
+  version = "v1.0.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/prometheus/client_model"
+  packages = ["go"]
+  revision = "fd36f4220a901265f90734c3183c5f0c91daa0b8"
+
+[[projects]]
+  name = "github.com/prometheus/common"
+  packages = [
+    "expfmt",
+    "internal/bitbucket.org/ww/goautoneg",
+    "model"
+  ]
+  revision = "31bed53e4047fd6c510e43a941f90cb31be0972a"
+  version = "v0.6.0"
+
+[[projects]]
+  name = "github.com/prometheus/procfs"
+  packages = [
+    ".",
+    "internal/fs"
+  ]
+  revision = "3f98efb27840a48a7a2898ec80be07674d19f9c8"
+  version = "v0.0.3"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/sys"
+  packages = ["windows"]
+  revision = "04f50cda93cbb67f2afa353c52f342100e80e625"
+
+[[projects]]
   name = "google.golang.org/appengine"
   packages = ["cloudsql"]
   revision = "b2f4a3cf3c67576a2ee09e1fe62656a5086ce880"
@@ -37,6 +96,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "43489f5a048ffe1da1e13d4c269fe5252ad10ebe21b1903b8cfd6745466e1ff0"
+  inputs-digest = "ac3699bed6e5b681f403db50fa7514fe4f534d8a92ddc0184a6648d4cb7b70ca"
   solver-name = "gps-cdcl"
   solver-version = 1
