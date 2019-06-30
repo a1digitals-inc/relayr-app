@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "relayr-app.name" . }}
+spec:
+  ports:
+  - name: {{ template "relayr-app.name" . }}
+    port: {{ .Values.service.port }}
+    protocol: TCP
+    targetPort: {{ .Values.targetPort }}
+  selector:
+    app: {{ template "relayr-app.name" . }}
