@@ -24,4 +24,4 @@ before_script:
   - dep ensure
 script:
   - go test -race -coverprofile=coverage.txt -covermode=atomic ./...
-  - make test build VERSION="$TRAVIS_COMMIT"
+  - make build
