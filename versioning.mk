@@ -1,6 +1,6 @@
 
 GITCOMMIT_SHORT = $(shell git rev-parse --short HEAD)
-GIT_TAG ?= $(or ${TRAVIS_TAG},${TRAVIS_TAG},${ITCOMMIT_SHORT})
+GIT_TAG ?= $(or ${TRAVIS_TAG},${TRAVIS_TAG},${GITCOMMIT_SHORT})
 MUTABLE_VERSION ?= latest
 VERSION ?= ${GIT_TAG}
 GITCOMMIT ?= $(shell git rev-parse HEAD)
