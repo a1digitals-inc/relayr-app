@@ -1,5 +1,5 @@
 image: quay.io/andrleite/relayr-app
-imageTag: v0.1.0
+imageTag: v0.1.1
 imagePullPolicy: IfNotPresent
 targetPort: 9000
 service:
