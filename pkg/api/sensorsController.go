@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -50,7 +49,6 @@ func (a *Api) GetSensor(w http.ResponseWriter, r *http.Request) {
 // PutSensor update sensor info
 func (a *Api) PutSensor(w http.ResponseWriter, r *http.Request) {
 	var s models.Sensor
-	fmt.Println(r)
 	vars := mux.Vars(r)
 	id, _ := strconv.ParseUint(vars["id"], 10, 10)
 	body, _ := ioutil.ReadAll(r.Body)
