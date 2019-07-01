@@ -17,7 +17,7 @@ var a Api
 
 func TestMain(m *testing.M) {
 	a = Api{}
-	a.Initialize("root", "root", "localhost", "3306", "relayrTest")
+	a.Initialize("root", "", "", "", "relayrTest")
 
 	ensureTableExists()
 
