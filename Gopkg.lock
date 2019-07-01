@@ -8,6 +8,12 @@
   version = "v1.0.0"
 
 [[projects]]
+  name = "github.com/davecgh/go-spew"
+  packages = ["spew"]
+  revision = "8991bc29aa16c548c550c7ff78260e27b9ab7c73"
+  version = "v1.1.1"
+
+[[projects]]
   name = "github.com/go-sql-driver/mysql"
   packages = ["."]
   revision = "72cd26f257d44c1114970e19afddcd812016007e"
@@ -29,7 +35,8 @@
   name = "github.com/jinzhu/gorm"
   packages = [
     ".",
-    "dialects/mysql"
+    "dialects/mysql",
+    "dialects/postgres"
   ]
   revision = "01b66011427614f01e84a473b0303c917179f2a0"
   version = "v1.9.9"
@@ -41,10 +48,33 @@
   version = "v1.0.0"
 
 [[projects]]
+  name = "github.com/lib/pq"
+  packages = [
+    ".",
+    "hstore",
+    "oid",
+    "scram"
+  ]
+  revision = "bc6a3c0594130b1e34005880bc600b6d3f49fa7f"
+  version = "v1.1.1"
+
+[[projects]]
   name = "github.com/matttproud/golang_protobuf_extensions"
   packages = ["pbutil"]
   revision = "c12348ce28de40eed0136aa2b644d0ee0650e56c"
   version = "v1.0.1"
+
+[[projects]]
+  name = "github.com/pkg/errors"
+  packages = ["."]
+  revision = "ba968bfe8b2f7e042a574c888954fccecfa385b4"
+  version = "v0.8.1"
+
+[[projects]]
+  name = "github.com/pmezard/go-difflib"
+  packages = ["difflib"]
+  revision = "792786c7400a136282c1664665ae0a8db921c6c2"
+  version = "v1.0.0"
 
 [[projects]]
   name = "github.com/prometheus/client_golang"
@@ -82,6 +112,12 @@
   version = "v0.0.3"
 
 [[projects]]
+  name = "github.com/stretchr/testify"
+  packages = ["assert"]
+  revision = "ffdc059bfe9ce6a4e144ba849dbedead332c6053"
+  version = "v1.3.0"
+
+[[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["windows"]
@@ -96,6 +132,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ac3699bed6e5b681f403db50fa7514fe4f534d8a92ddc0184a6648d4cb7b70ca"
+  inputs-digest = "5110c5c037208c44bc7176b92b6a34fee478871ea8f919838c8ddcc64f55d22b"
   solver-name = "gps-cdcl"
   solver-version = 1
