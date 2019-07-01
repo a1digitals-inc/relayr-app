@@ -12,9 +12,14 @@ spec:
       labels:
         app: {{ template "relayr-app.name" . }}
     spec:
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 2000
       initContainers:
       - name: check-db-ready
         image: mysql:latest
+        securityContext:
+          allowPrivilegeEscalation: false
         command: ['sh', '-c',
           'until mysqladmin -s ping -h $DATABASE_HOST -u root -p${DATABASE_PASSWORD} -P ${DATABASE_PORT};
           do echo waiting for database; sleep 2; done;']
@@ -42,6 +47,8 @@ spec:
       - name: {{ template "relayr-app.name" . }}
         image: "{{ .Values.image }}:{{ .Values.imageTag }}"
         imagePullPolicy: {{ .Values.imagePullPolicy | quote }}
+        securityContext:
+          allowPrivilegeEscalation: false
         env:
         - name: DATABASE_USER
         {{- if .Values.database.user }}

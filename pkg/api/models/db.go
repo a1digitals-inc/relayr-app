@@ -2,41 +2,30 @@ package models
 
 import (
 	"fmt"
-	"log"
-	"os"
 
 	"github.com/jinzhu/gorm"
+
 	// This is necessary for gorm dialects
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/pkg/errors"
 )
 
-// getEnv get key environment variable if exist otherwise return defalutValue
-func getEnv(env string) string {
-	value := os.Getenv(env)
-	if len(value) == 0 {
-		log.Printf("Environment variable %s not found!", env)
-	}
-	return value
+//Database struct to connect to gorm
+type Database struct {
+	*gorm.DB
 }
 
-// Connect create a new connection with database and return it
-func Connect() *gorm.DB {
-	dbUser := getEnv("DATABASE_USER")
-	dbPass := getEnv("DATABASE_PASSWORD")
-	dbHost := getEnv("DATABASE_HOST")
-	dbPort := getEnv("DATABASE_PORT")
-	dbName := getEnv("DATABASE_NAME")
-
-	URL := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
+//New return new connection pool
+func New(dbUser, dbPass, dbHost, dbPort, dbName string) (*Database, error) {
+	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		dbUser,
 		dbPass,
 		dbHost,
 		dbPort,
 		dbName)
-	db, err := gorm.Open("mysql", URL)
+	db, err := gorm.Open("mysql", connectionString)
 	if err != nil {
-		log.Fatal(err)
-		return nil
+		return nil, errors.Wrap(err, "unable to connect to database")
 	}
-	return db
+	return &Database{db}, nil
 }

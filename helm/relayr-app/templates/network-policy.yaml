@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: access-mysql
+spec:
+  podSelector:
+    matchLabels:
+      app: {{ template "relayr-app.name" . }}-mysql
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: "{{ template "relayr-app.name" . }}"
+    ports:
+    - protocol: TCP
+      port: 3306

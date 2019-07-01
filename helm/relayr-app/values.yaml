@@ -1,5 +1,5 @@
 image: quay.io/andrleite/relayr-app
-imageTag: 8d005bca9a441fd3c6fb203147cd4dc5f669f76b
+imageTag: v0.1.0
 imagePullPolicy: IfNotPresent
 targetPort: 9000
 service:
@@ -7,9 +7,9 @@ service:
 ingress:
   host: relayr.app
 database:
-  name:
-  user:
-  port:
+  name: ""
+  user: ""
+  port: ""
 resources:
   requests:
     memory: 25Mi

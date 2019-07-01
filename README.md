@@ -1,5 +1,5 @@
 # relayr-app
-A microservice app run in minikube
+A cloud native app run in minikube
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/andrleite/relayr-app)](https://goreportcard.com/report/github.com/andrleite/relayr-app)
 [![codecov](https://codecov.io/gh/andrleite/relayr-app/branch/master/graph/badge.svg)](https://codecov.io/gh/andrleite/relayr-app)
@@ -52,33 +52,48 @@ echo "$(minikube ip) relayr.app" | sudo tee -a /etc/hosts
 ```
 ## API
 #### /sensors
-* `GET` : Get all devices
-* `POST` : Create a new iot devices
+* `GET` : Get all iot sensors
+* `POST` : Create a new iot sensor
 
 #### /sensors/:id
-* `GET` : Get a device
-* `PUT` : Update a device
-* `DELETE` : Delete a device
+* `GET` : Get a iot sensor
+* `PUT` : Update a iot sensor
+* `DELETE` : Delete a iot sensor
 
-#### example:
+#### examples:
 
 - create new sensor
-```
+```bash
 curl  --cacert hack/certs/tls.crt \
       -X POST \
       -H "Content-Type: application/json" \
-      -d '{"name": "sensor1", "email": "sensor1.device.com"}' \
-      https://relayr.app/users
+      -d '{"name": "sensorX", "type": "temperature"}' \
+      https://relayr.app/sensors
 ```
 - get all sensors
 ```bash
 curl  --cacert hack/certs/tls.crt \
-      https://relayr.app/users | jq .
+      https://relayr.app/sensors | jq .
 ```
 - get sensor by id
 ```bash
 curl  --cacert hack/certs/tls.crt \
-      https://relayr.app/users/1 | jq .
+      https://relayr.app/sensors/1 | jq .
+```
+- update sensor
+```bash
+curl  --cacert hack/certs/tls.crt \
+      -X PUT \
+      -d '{"type": "pressure"}' \
+      -H "Content-Type: application/json" \
+      https://relayr.app/sensors/1
+```
+- delete sensor
+```bash
+curl  --cacert hack/certs/tls.crt \
+      -X DELETE \
+      -H "Content-Type: application/json" \
+      https://relayr.app/sensors/1
 ```
 ## Tear Down
 ```bash
