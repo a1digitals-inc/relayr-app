@@ -3,6 +3,7 @@ package api
 import (
 	"bytes"
 	"encoding/json"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -129,6 +130,27 @@ func TestCreateSensor(t *testing.T) {
 	jsonSensor, _ := json.Marshal(sensor)
 
 	req, err := http.NewRequest("POST", "/sensors", bytes.NewBuffer(jsonSensor))
+	checkError(err, t)
+
+	rr := httptest.NewRecorder()
+	http.HandlerFunc(a.PostSensor).
+		ServeHTTP(rr, req)
+
+	if status := rr.Code; status != http.StatusCreated {
+		t.Errorf("Status code differs. Expected %d .\n Got %d instead", http.StatusCreated, status)
+	}
+}
+func TestUpdateSensor(t *testing.T) {
+	update := models.Sensor{
+		Type: "tempurature",
+	}
+
+	var jsonData []byte
+	jsonData, err := json.Marshal(update)
+	if err != nil {
+		log.Println(err)
+	}
+	req, err := http.NewRequest("POST", "/sensors", bytes.NewBuffer(jsonData))
 	checkError(err, t)
 
 	rr := httptest.NewRecorder()
