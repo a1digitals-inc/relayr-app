@@ -60,7 +60,7 @@ func (a *Api) PutSensor(w http.ResponseWriter, r *http.Request) {
 	s.ID = uint(id)
 	value, err := s.UpdateSensor(a.DB)
 	if err != nil {
-		utils.ToError(w, err, http.StatusUnprocessableEntity)
+		utils.ToError(w, err, http.StatusNoContent)
 		return
 	}
 	utils.ToJSON(w, value, http.StatusOK)

@@ -20,7 +20,7 @@ type Sensor struct {
 
 // NewSensor add new sensor to database
 func (s *Sensor) NewSensor(db *Database) (interface{}, error) {
-	rs := db.Debug().Create(&s)
+	rs := db.Create(&s)
 	return rs.Value, rs.Error
 }
 
@@ -35,7 +35,7 @@ func (s *Sensor) UpdateSensor(db *Database) (interface{}, error) {
 		rs := db.Where("id = ?", s.ID).Find(&Sensor{}).Update("type", s.Type)
 		return rs.Value, rs.Error
 	}
-	return erromsg, log.Output(422, erromsg)
+	return erromsg, log.Output(204, erromsg)
 }
 
 // GetAll sensors
