@@ -3,8 +3,10 @@ language: go
 go: "1.10"
 services:
   - docker
+  - mysql
 
 before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS relayrTest;'
   - go get -t -v ./...
 
 go_import_path: github.com/andrleite/relayr-app
